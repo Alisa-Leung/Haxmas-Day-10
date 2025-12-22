@@ -57,8 +57,8 @@ function love.update(dt)
 
     spawnTimer = spawnTimer + dt
     if spawnTimer >= spawnInterval then
-        spawntimer = 0
-        spawnInterval = math.random(10, 20,) / 10
+        spawnTimer = 0
+        spawnInterval = math.random(10, 20) / 10
         spawnObstacle()
     end
 
@@ -79,7 +79,7 @@ function love.update(dt)
     end
 end
 
-functioin love.draw()
+function love.draw()
     love.graphics.clear(1, 1, 1)
 
     love.graphics.setColor(0, 0, 0)

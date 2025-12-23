@@ -37,6 +37,7 @@ function love.load()
     images.snail[5] = love.graphics.newImage("assets/shell4.png")
     images.snail[6] = love.graphics.newImage("assets/snail2.png")
     images.salt = love.graphics.newImage("assets/salt.png")
+    images.sky = love.graphics.newImage("assets/sky.png")
 
     local targetHeight = 100
     snailScale = targetHeight / images.snail[player.snailIndex]:getHeight()
@@ -46,7 +47,7 @@ function love.load()
     ground.y = love.graphics.getHeight() - ground.height
     player.y = ground.y - player.height + 25
 
-    love.graphics.setFont(love.graphics.newFont(20))
+    love.graphics.setFont(love.graphics.newFont("assets/pixelifySans.ttf", 20))
 end
 
 function love.update(dt)
@@ -117,7 +118,14 @@ end
 function love.draw()
     love.graphics.clear(1, 1, 1)
 
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(images.sky, 0, 0)
+
+    love.graphics.setColor(162 / 255, 222 / 255, 137 / 255)
+    love.graphics.rectangle("fill", 0, ground.y, love.graphics.getWidth(), love.graphics.getHeight() - ground.y)
+
+    love.graphics.setColor(89 / 255, 174 / 255, 101 / 255)
+    love.graphics.setLineWidth(3)
     love.graphics.line(0, ground.y, love.graphics.getWidth(), ground.y)
 
     love.graphics.setColor(1, 1, 1)
@@ -139,8 +147,8 @@ function love.draw()
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 
         love.graphics.setColor(1, 1, 1)
-        love.graphics.print("Game Over", love.graphics.getWidth() / 2 - 60, love.graphics.getHeight() / 2 - 30)
-        love.graphics.print("Press [Space] to restart", love.graphics.getWidth() / 2 - 100, love.graphics.getHeight() / 2 + 10)
+        love.graphics.printf("Game Over", 0, love.graphics.getHeight() / 2 - 30, love.graphics.getWidth(), "center")
+        love.graphics.printf("Press [Space] to restart", 0, love.graphics.getHeight() / 2 + 10, love.graphics.getWidth(), "center")
     end
 end
 

@@ -20,17 +20,17 @@ local gravity = 1200
 local jumpForce = -500
 
 local images = {}
-local dinoScale = 1
+local snailScale = 1
 
 function love.load()
     love.window.setTitle("Haxmas Day 10: Runner")
 
-    images.dino = love.graphics.newImage("assets/dino.png")
-    images.cactus = love.graphics.newImage("assets/cactus.png")
+    images.snail = love.graphics.newImage("assets/snail1.png")
+    images.salt = love.graphics.newImage("assets/salt.png")
 
-    local targetHeight = 60 --height of the dino image
-    dinoScale = targetHeight / images.dino:getHeight()
-    player.width = images.dino:getWidth() * dinoScale
+    local targetHeight = 100
+    snailScale = targetHeight / images.snail:getHeight()
+    player.width = images.snail:getWidth() * snailScale
     player.height = targetHeight
 
     ground.y = love.graphics.getHeight() - ground.height
@@ -86,12 +86,12 @@ function love.draw()
     love.graphics.line(0, ground.y, love.graphics.getWidth(), ground.y)
 
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(images.dino, player. x, player.y, 0, dinoScale, dinoScale)
+    love.graphics.draw(images.snail, player. x, player.y, 0, snailScale, snailScale)
 
     for _, obs in ipairs(obstacles) do
-        love.graphics.draw(images.cactus, obs.x, obs.y, 0,
-            obs.width / images.cactus:getWidth(),
-            obs.height / images.cactus:getHeight())
+        love.graphics.draw(images.salt, obs.x, obs.y, 0,
+            obs.width / images.salt:getWidth(),
+            obs.height / images.salt:getHeight())
     end
 
     love.graphics.setColor(0, 0, 0)
@@ -126,8 +126,8 @@ end
 function spawnObstacle()
     local obstacle = {
         x = love.graphics.getWidth(),
-        width = 30,
-        height = 50
+        width = 70,
+        height = 70
     }
     obstacle.y = ground.y - obstacle.height + 1
     table.insert(obstacles, obstacle)

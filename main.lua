@@ -8,7 +8,7 @@ local player = {
     isJumping = false
 }
 
-local ground = { y = 0, height = 40 }
+local ground = { y = 0, height = 100 }
 local obstacles = {}
 local spawnTimer = 0
 local spawnInterval = 1.5
@@ -34,7 +34,7 @@ function love.load()
     player.height = targetHeight
 
     ground.y = love.graphics.getHeight() - ground.height
-    player.y = ground.y - player.height + 1
+    player.y = ground.y - player.height + 25
 
     love.graphics.setFont(love.graphics.newFont(20))
 end
@@ -49,7 +49,7 @@ function love.update(dt)
         player.y = player.y + player.velocityY * dt
 
         if player.y >= ground.y - player.height then
-            player.y = ground.y - player.height + 1
+            player.y = ground.y - player.height + 25
             player.isJumping = false
             player.velocityY = 0
         end
@@ -96,7 +96,7 @@ function love.draw()
 
     love.graphics.setColor(0, 0, 0)
     love.graphics.print("Score: " .. math.floor(score), 10, 10)
-    love.graphics.print("HighScore: " .. math.floor(highScore), 10, 35)
+    love.graphics.print("High Score: " .. math.floor(highScore), 10, 35)
 
     if gameOver then
         love.graphics.setColor(0, 0, 0, 0.7)
@@ -126,10 +126,10 @@ end
 function spawnObstacle()
     local obstacle = {
         x = love.graphics.getWidth(),
-        width = 70,
-        height = 70
+        width = 100,
+        height = 100
     }
-    obstacle.y = ground.y - obstacle.height + 1
+    obstacle.y = ground.y - obstacle.height + 35
     table.insert(obstacles, obstacle)
 end
 
@@ -146,7 +146,7 @@ function restartGame()
     obstacles = {}
     spawnTimer = 0
     gameSpeed = 300
-    player.y = ground.y - player.height + 1
+    player.y = ground.y - player.height + 25
     player.isJumping = false
     player.velocityY = 0
 end
